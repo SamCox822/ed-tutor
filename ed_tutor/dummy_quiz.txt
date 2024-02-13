@@ -1,4 +1,5 @@
 Which of the following statements correctly describes the interaction between subatomic particles in an atom?
+answer options:
 A) Electrons in an atom's nucleus repel protons, leading to atomic stability.
 B) Neutrons stabilize the nucleus by offsetting the electrostatic repulsion between electrons and protons.
 C) Protons and electrons in the nucleus attract each other, preventing the atom from collapsing.
@@ -7,6 +8,7 @@ correct answer:
 D
 
 Which statement accurately describes the energy change associated with the formation of chemical bonds?
+answer options:
 A) The formation of covalent bonds always requires energy absorption, leading to an unstable molecular structure.
 B) Ionic bond formation involves the release of energy as atoms achieve a more stable electronic configuration through the transfer of electrons.
 C) Hydrogen bonds form when there is a transfer of electrons from hydrogen to electronegative atoms, resulting in significant energy release.
@@ -15,6 +17,7 @@ correct answer:
 B
 
 Which of the following uses of noble gases is incorrectly paired with the gas?
+answer options:
 A) Helium (He) - Used in balloons and airships because it is lighter than air and non-flammable.
 B) Neon (Ne) - Used in fluorescent lamps due to its ability to emit light when electrified.
 C) Argon (Ar) - Commonly used in the production of reactive elements due to its high reactivity.

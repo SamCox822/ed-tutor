@@ -3,8 +3,23 @@ import streamlit as st
 
 #import RubricGuide
 from ed_tutor.agent import StudyBuddy, LLMQuizer
+from ed_tutor.chat import ChatBuddy
 
-#quiz = "./ed_tutor/dummy_quiz.txt"
+chat = ChatBuddy()
+
+#make sure files exist
+if not os.path.exists("context.json"):
+    with open("context.json", "w") as f:
+        f.write("")
+if not os.path.exists("chat_history.json"):
+    with open("chat_history.json", "w") as f:
+        f.write("")
+
+resume_op = st.selectbox("Mode:", ["Take Quiz", "Chat about Quiz"])
+if resume_op == "Take Quiz":
+    resume = False
+else:
+    resume = True
 
 # Streamlit app
 st.title("Quiz")
@@ -48,18 +63,18 @@ llm = LLMQuizer(temperature=0, llm='gpt4', file=notes_uploaded)
 quiz = st.file_uploader(
     "Upload your quiz as a txt file", type=["txt"],)
 # write file to disk
-if quiz:
+if quiz and notes_uploaded:
     with open(quiz.name, "wb") as f:
         f.write(quiz.getbuffer())
 
     st.write("Files successfully uploaded!")
     quiz_uploaded = os.path.join(os.getcwd(), quiz.name)
-
     options, answer = get_answer_options(quiz_uploaded)
-
     question = display_quiz(quiz_uploaded)
+    #options is list -> make string
+    question_for_study_buddy = question + ''.join(options)
 
-    study_buddy = StudyBuddy(question=question, correct_answer=answer, quiz=quiz_uploaded, llm=llm)
+    study_buddy = StudyBuddy(question=question_for_study_buddy, correct_answer=answer, quiz=quiz_uploaded, llm=llm)
 
     def generate_response(answer:str) -> str:
         result = study_buddy.run(answer)
@@ -67,16 +82,30 @@ if quiz:
 
     scratch = st.empty()
     question = display_quiz(quiz_uploaded)
-    st.write(question, allow_unsafe_html=True)
-    for option in options:
-        st.write(option)
-    st.write('\n' + "Input the letter of the correct answer.", allow_unsafe_html=True)
+    if not resume:
+        st.write(question, allow_unsafe_html=True)
+        for option in options:
+            st.write(option)
+        st.write('\n' + "Input the letter of the correct answer.", allow_unsafe_html=True)
 
-    if answer := st.chat_input():
-        st.chat_message("user").write(answer)
-        with st.chat_message("assistant"):
-            response = generate_response(answer)
-            st.write(response)
+        if answer := st.chat_input():
+            st.chat_message("user").write(answer)
+            with st.chat_message("assistant"):
+                response = generate_response(answer)
+                st.write(response)
+    else:
+        def chat_generate(question:str) -> str:
+            result = chat.run(question)
+            return result
+        scratch = st.empty()
+        st.write("How can I help?", allow_unsafe_html=True)
+
+        if question := st.chat_input():
+            st.chat_message("user").write(question)
+            with st.chat_message("assistant"):
+                response = chat_generate(question)
+                st.write(response)
+
 else:
     quiz_uploaded=""
     print ("No file uploaded")

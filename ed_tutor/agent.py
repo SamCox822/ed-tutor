@@ -71,6 +71,9 @@ class StudyBuddy():
     #take in a student answer
     #if wrong, call the lab guider to help student
     LLMQuizer = LLMQuizer
+    #create blank file context.json
+    with open("context.json", "w") as f:
+        f.write("")
 
     def __init__(self, question:str = None, correct_answer:str = None, quiz:str=None, llm=None):
         self.llm = llm
@@ -79,8 +82,6 @@ class StudyBuddy():
         self.question=question
     
     def _check_answer(self, answer:str, correct_answer:str) -> bool:
-        #check if student answer is correct
-        #get lower of both and strip any whitespace
         answer = answer.lower().strip()
         correct_answer = correct_answer.lower().strip()
         return answer == correct_answer
@@ -89,8 +90,18 @@ class StudyBuddy():
         return self.llm.run(wrong, question=self.question, correct=self.correct_answer)
     
     def run(self, answer:str) -> str:
+        #write to json file called context.json
+        context = {"question": self.question, "correct_answer": self.correct_answer, "student answer": answer}
         if self._check_answer(answer, self.correct_answer):
+            #write to json
+            with open("context.json", "a") as f:
+                f.write(str(context))
             return "Correct!"
         else:
-            return self._if_wrong(answer)
-    
+            #add message to context
+            message = self._if_wrong(answer)
+            context["message"] = message
+            #write to json
+            with open("context.json", "a") as f:
+                f.write(str(context))
+            return message
