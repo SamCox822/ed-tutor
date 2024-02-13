@@ -13,7 +13,6 @@ A) Covalent bond
 B) Ionic bond
 C) Hydrogen bond
 D) Metallic bond
-
 correct answer:
 B
 
@@ -25,3 +24,11 @@ C) Argon
 D) Sodium
 correct answer:
 C
+
+Which of the following statements correctly describes the interaction between subatomic particles in an atom?
+A) Electrons in an atom's nucleus repel protons, leading to atomic stability.
+B) Neutrons stabilize the nucleus by offsetting the electrostatic repulsion between electrons and protons.
+C) Protons and electrons in the nucleus attract each other, preventing the atom from collapsing.
+D) The absence of charge in neutrons contributes to the electrostatic balance between protons and electrons in the atom.
+correct answer:
+D

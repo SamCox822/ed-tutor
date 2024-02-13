@@ -1,27 +1,23 @@
-What is the charge of a neutron?
-answer options:
-A) +1 
-B) 0
-C) -1
-D) +2
+Which of the following statements correctly describes the interaction between subatomic particles in an atom?
+A) Electrons in an atom's nucleus repel protons, leading to atomic stability.
+B) Neutrons stabilize the nucleus by offsetting the electrostatic repulsion between electrons and protons.
+C) Protons and electrons in the nucleus attract each other, preventing the atom from collapsing.
+D) The absence of charge in neutrons contributes to the electrostatic balance between protons and electrons in the atom.
+correct answer:
+D
+
+Which statement accurately describes the energy change associated with the formation of chemical bonds?
+A) The formation of covalent bonds always requires energy absorption, leading to an unstable molecular structure.
+B) Ionic bond formation involves the release of energy as atoms achieve a more stable electronic configuration through the transfer of electrons.
+C) Hydrogen bonds form when there is a transfer of electrons from hydrogen to electronegative atoms, resulting in significant energy release.
+D) Metallic bonds are formed through the absorption of energy, which allows electrons to move freely among ions.
 correct answer:
 B
 
-Which type of bond is formed by the transfer of electrons from one atom to another?
-answer options:
-A) Covalent bond
-B) Ionic bond
-C) Hydrogen bond
-D) Metallic bond
-
-correct answer:
-B
-
-Which element is classified as a noble gas?
-answer options:
-A) Hydrogen
-B) Oxygen
-C) Argon
-D) Sodium
+Which of the following uses of noble gases is incorrectly paired with the gas?
+A) Helium (He) - Used in balloons and airships because it is lighter than air and non-flammable.
+B) Neon (Ne) - Used in fluorescent lamps due to its ability to emit light when electrified.
+C) Argon (Ar) - Commonly used in the production of reactive elements due to its high reactivity.
+D) Xenon (Xe) - Used in flash lamps and arc lamps for photography and in medicine for its high light output.
 correct answer:
 C

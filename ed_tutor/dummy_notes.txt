@@ -1,0 +1,19 @@
+1. Particle Charges in Atoms
+Atoms are made up of three types of subatomic particles: protons, neutrons, and electrons.
+Protons have a positive charge (+1) and are found in the nucleus of an atom.
+Neutrons have no charge (neutral) and are also located in the nucleus alongside protons.
+Electrons have a negative charge (-1) and orbit the nucleus in electron shells.
+The charge of a particle plays a critical role in determining the atom's behavior in chemical reactions and its interaction with other atoms.
+
+2. Types of Chemical Bonds
+Chemical bonds are forces that hold atoms together in molecules or compounds. There are several types of bonds, each with unique properties and mechanisms.
+Covalent bonds form when two atoms share one or more pairs of electrons, leading to the formation of molecules. This sharing allows each atom to achieve a stable electronic configuration similar to noble gases.
+Ionic bonds occur when electrons are transferred from one atom to another, resulting in the formation of positively charged ions (cations) and negatively charged ions (anions). These ions are attracted to each other due to their opposite charges, forming ionic compounds.
+Hydrogen bonds are a type of weak bond that occurs when a hydrogen atom covalently bonded to one electronegative atom is also attracted to another electronegative atom.
+Metallic bonds are found in metals, where electrons are shared in a lattice of ions. This sharing results in properties such as conductivity and malleability.
+
+3. Noble Gases
+Noble gases are elements in Group 18 of the periodic table. They are known for their lack of reactivity compared to other elements.
+This lack of reactivity is due to their full valence electron shell, which makes them stable and not inclined to form bonds with other elements under standard conditions.
+Noble gases include Helium (He), Neon (Ne), Argon (Ar), Krypton (Kr), Xenon (Xe), and Radon (Rn).
+These gases are used in various applications due to their inertness, such as in lighting, welding, and as inert atmospheres for chemical reactions.
