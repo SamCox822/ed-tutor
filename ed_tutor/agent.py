@@ -92,16 +92,9 @@ class StudyBuddy():
     def run(self, answer:str) -> str:
         #write to json file called context.json
         context = {"question": self.question, "correct_answer": self.correct_answer, "student answer": answer}
-        if self._check_answer(answer, self.correct_answer):
-            #write to json
-            with open("context.json", "a") as f:
-                f.write(str(context))
-            return "Correct!"
-        else:
-            #add message to context
-            message = self._if_wrong(answer)
-            context["message"] = message
-            #write to json
-            with open("context.json", "a") as f:
-                f.write(str(context))
-            return message
+        message = self._if_wrong(answer)
+        context["message"] = message
+        #write to json
+        with open("context.json", "a") as f:
+            f.write(str(context))
+        return message
