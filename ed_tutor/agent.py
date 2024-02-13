@@ -4,7 +4,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.prompts import PromptTemplate
 from langchain.agents import ZeroShotAgent
 from langchain.tools import BaseTool
-import os
+from langchain_openai import ChatOpenAI
 
 #dummy tool for now
 class DummyTool(BaseTool): #in case we want to add tools later
@@ -16,39 +16,30 @@ class DummyTool(BaseTool): #in case we want to add tools later
 
 
 instructions = PromptTemplate(
-    input_variables=["rubric", "procedure", "report"],
-    template="""You are the Professor of a general chemistry course at a university.
-    I will give you the lab procedure and the report rubric. I will also give you a student's lab report. Your task is to guide the student, with the following gudie:
-    1. Does the report contain all the required sections?
-    2. Does the report contain all the required information and calculations?
-    3. What grade would you give the student's report in each section?
-    4. How can the student improve the report, based on the rubric?
+        input_variables=["notes", "question", "wrong", "correct"],
+        template="""You are an helpful assistant tasked with helping students understand why their answer on a quiz question is incorrect. You will have access to the question that student was asked,
+        the answer they provided, and the correct answer. Based on the class notes I will give you, explain to the student why their answer is incorrect.  
 
-    Do not use any tools. 
+        Please contain your explanation to the text contained in the class notes. Please keep the discussion focused on the concepts relating to the question.
+        Do not ask questions.
 
-    Here is the rubric: {rubric}
-    Here is the lab procedure: {procedure}
-    Here is the student's report: {report}
-    """)
+        Here are the class notes: {notes}
+        Here is the question student was asked: {question}
+        Here is what they answered (incorrect): {wrong}
+        Here is the correct answer: {correct}
+        """
+        )
 
-class LabGuider:
-    def __init__(self, temperature=0, llm='gpt4', file=None, rubric=None, procedure=None):
+class LLMQuizer:
+    def __init__(self, temperature=0, llm='gpt4', file=""):
         self.temperature = temperature
         self.llm = llm
         self.prompt = instructions
         self.file = file
-        self.rubric = rubric
-        self.procedure = procedure
-
-        with open(rubric, "r") as f:
-            self.rubric = f.read()
-        
-        with open(procedure, "r") as f:
-            self.procedure = f.read()
 
         if file != "":
             with open(file, "r") as f:
-                self.report = f.read()
+                self.notes = f.read()
 
         self.model = ChatOpenAI(
             temperature=self.temperature,
@@ -59,6 +50,7 @@ class LabGuider:
             callbacks=[StreamingStdOutCallbackHandler()],
         )
         self.tools = [DummyTool()]
+        
         self.agent_instance = AgentExecutor.from_agent_and_tools(
             tools=self.tools,
             agent=ZeroShotAgent.from_llm_and_tools(
@@ -68,7 +60,37 @@ class LabGuider:
             return_intermediate_steps=False,
             verbose=False
         )
+
        
-    def run(self):
-        output = self.agent_instance.invoke(self.prompt.format(rubric=self.rubric, procedure=self.procedure, report=self.report))
+    def run(self, wrong, question, correct):
+        output = self.agent_instance.invoke(self.prompt.format(notes=self.notes, question=question, wrong=wrong, correct=correct))
         return output["output"]
+
+class StudyBuddy():
+    #input a quiz and display one question to student
+    #take in a student answer
+    #if wrong, call the lab guider to help student
+    LLMQuizer = LLMQuizer
+
+    def __init__(self, question:str = None, correct_answer:str = None, quiz:str=None, llm=None):
+        self.llm = llm
+        self.correct_answer = correct_answer
+        self.quiz = quiz
+        self.question=question
+    
+    def _check_answer(self, answer:str, correct_answer:str) -> bool:
+        #check if student answer is correct
+        #get lower of both and strip any whitespace
+        answer = answer.lower().strip()
+        correct_answer = correct_answer.lower().strip()
+        return answer == correct_answer
+    
+    def _if_wrong(self, wrong:str):
+        return self.llm.run(wrong, question=self.question, correct=self.correct_answer)
+    
+    def run(self, answer:str) -> str:
+        if self._check_answer(answer, self.correct_answer):
+            return "Correct!"
+        else:
+            return self._if_wrong(answer)
+    
